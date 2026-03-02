@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>PNP Care | Health Analytics Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- AUTH SCREEN -->
+<div id="auth-screen" class="auth-screen">
+    <div class="auth-card">
+        <div class="auth-icon"><i class="fas fa-heartbeat"></i></div>
+        <h1>PNP Care</h1>
+        <p>สุขภาพที่ดีขึ้นด้วยการวิเคราะห์อัจฉริยะ</p>
+
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label class="form-label">ชื่อของคุณ</label>
+                <input type="text" id="username" class="form-input" placeholder="กรุณาป้อนชื่อของคุณ" required>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-sign-in-alt"></i> เข้าสู่ระบบ
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="main-app" class="app-wrapper hidden">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-heart"></i></div>
+                <span>PNP Care</span>
+            </div>
+        </div>
+
+        <nav class="nav-menu">
+            <div class="nav-item active" onclick="switchPage('dashboard', event)">
+                <i class="fas fa-chart-line"></i> แดชบอร์ด
+            </div>
+            <div class="nav-item" onclick="switchPage('chat', event)">
+                <i class="fas fa-robot"></i> ปรึกษา AI
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-card">
+                <div class="user-avatar">
+                    <span id="user-initial">U</span>
+                </div>
+                <div>
+                    <div class="user-name" id="user-display">--</div>
+                    <div class="user-status">✓ ใช้งานอยู่</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+        <div class="header">
+            <h1 id="page-title">แดชบอร์ด</h1>
+        </div>
+
+        <div class="content">
+
+            <!-- DASHBOARD -->
+            <div id="page-dashboard" class="section">
+                <button class="btn btn-primary" onclick="startAnalyze()">
+                    <i class="fas fa-heartbeat"></i> สแกนสถานะสุขภาพ
+                </button>
+
+                <div class="card mt-6">
+                    <canvas id="mainChart"></canvas>
+                </div>
+            </div>
+
+            <!-- CHAT -->
+            <div id="page-chat" class="section section-hidden">
+                <div id="chat-messages" class="chat-messages"></div>
+
+                <div class="chat-input-area">
+                    <input type="text" id="chat-input" class="form-input"
+                        placeholder="พูดถึงสุขภาพของคุณ..."
+                        onkeypress="if(event.key==='Enter') handleChat()">
+
+                    <button class="btn btn-primary" onclick="handleChat()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- External JS -->
+<script src="script.js"></script>
+
+</body>
+</html>
